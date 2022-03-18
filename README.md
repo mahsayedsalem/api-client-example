@@ -1,3 +1,5 @@
+![Unit Tests](https://github.com/mahsayedsalem/form3-api-client/actions/workflows/push.yml/badge.svg)
+
 <h1 align="center">
   Form 3 Take Home Excercise
 </h1>
