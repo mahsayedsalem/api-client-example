@@ -86,7 +86,7 @@ fmt.Println(res.Response.StatusCode)
 $ go test
 ```
 
-`e2e_tests` will only pass when the docker-compose services are up and running
+`e2e_tests` will only pass when the docker-compose services are up and running. Currently I've added the docker-compose build to the workflow so the test cases passes on the CI pipeline.
 
 ### Example folder
 
