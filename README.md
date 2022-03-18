@@ -86,6 +86,8 @@ fmt.Println(res.Response.StatusCode)
 $ go test
 ```
 
+`e2e_tests` will only pass when the docker-compose services are up and running
+
 ### Example folder
 
 Visit example folder to run key features directly.
