@@ -9,7 +9,10 @@
 <p align="center">
   <a href="#key-features">Key Features</a> •
   <a href="#usage">Usage</a> •
-<a href="#enhancements">Enhancements</a>
+  <a href="#testing">Testing</a> •
+  <a href="#example">Example</a> •
+  <a href="#continuous-integration">Continuous Integration</a> •
+  <a href="#enhancements">Enhancements</a>
 </p>
 
 ## Key Features
@@ -81,7 +84,10 @@ fmt.Println(res.Response.StatusCode)
 204
 ```
 
-### Run the tests
+## Testing
+I've included both unit tests and e2e tests. The current coverage is 86%. Moving forward we can improve that by increasing the test cases.
+
+### Run Tests
 
 #### Directly
 ```sh
@@ -90,16 +96,15 @@ $ go test
 
 #### Inside `docker-compose`
 ```sh
-$ docker-compose up --build
-```
-
-```sh
 $ docker-compose logs accountapi-client
 ```
 
 `e2e_tests` will only pass when the docker-compose services are up and running. Currently I've added the docker-compose build to the workflow so the test cases passes on the CI pipeline.
 
-### Example folder
+## Continuous Integration
+I created a Github Action workflow to run docker-compose and the test cases with each push. This will make us alert to any faulty code being pushed.
+
+## Example
 
 Visit example folder to run key features directly.
 
