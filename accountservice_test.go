@@ -60,6 +60,18 @@ func TestAccountsServiceFetch(t *testing.T) {
 	assert.Equal(t, "1", saved.ID)
 }
 
+func TestAccountsServiceFetchResourceNotFound(t *testing.T) {
+	router, server, service := setupAccountService()
+	defer server.Close()
+
+	router.HandleFunc("/v1/organisation/accounts/5", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	}).Methods(http.MethodGet)
+
+	_, _, err := service.Fetch(context.Background(), "1")
+	assert.Equal(t, "code: 404, message: 404 page not found\n", err.Error())
+}
+
 func TestAccountsServiceDelete(t *testing.T) {
 	router, server, service := setupAccountService()
 	defer server.Close()
@@ -71,4 +83,16 @@ func TestAccountsServiceDelete(t *testing.T) {
 	resp, err := service.Delete(context.Background(), "1", &version)
 	assert.Nil(t, err)
 	assert.Equal(t, 204, resp.StatusCode)
+}
+
+func TestAccountsServiceDeleteResourceNotFound(t *testing.T) {
+	router, server, service := setupAccountService()
+	defer server.Close()
+
+	router.HandleFunc("/v1/organisation/accounts/5", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusNoContent)
+	}).Methods(http.MethodDelete)
+	version := int64(1)
+	_, err := service.Delete(context.Background(), "1", &version)
+	assert.Equal(t, "code: 404, message: 404 page not found\n", err.Error())
 }
