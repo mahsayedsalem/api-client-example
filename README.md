@@ -82,8 +82,19 @@ fmt.Println(res.Response.StatusCode)
 ```
 
 ### Run the tests
+
+#### Directly
 ```sh
 $ go test
+```
+
+#### Inside `docker-compose`
+```sh
+$ docker-compose up --build
+```
+
+```sh
+$ docker-compose logs accountapi-client
 ```
 
 `e2e_tests` will only pass when the docker-compose services are up and running. Currently I've added the docker-compose build to the workflow so the test cases passes on the CI pipeline.

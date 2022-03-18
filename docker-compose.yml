@@ -1,6 +1,17 @@
 version: '3'
 
 services:
+  accountapi-client:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    restart: on-failure
+    environment:
+      - Form3_API_URL=http://accountapi:8080/
+      - CGO_ENABLED=0
+    depends_on:
+      - accountapi
+
   accountapi:
     image: form3tech/interview-accountapi:v1.0.0-50-ga251d4fc
     restart: on-failure
@@ -20,7 +31,8 @@ services:
       - DATABASE-USERNAME=interview_accountapi_user
       - DATABASE-PASSWORD=123
     ports:
-      - 8000:8080
+      - 8080:8080
+
   postgresql:
     image: postgres:9.5-alpine
     healthcheck:

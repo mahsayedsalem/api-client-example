@@ -2,6 +2,7 @@ package form3_api_client
 
 import (
 	"context"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
@@ -11,8 +12,6 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
-
-const BaseUrlEnvVariable = "http://localhost:8000/"
 
 func setupClient() (*mux.Router, *httptest.Server, *client) {
 	router := mux.NewRouter()
@@ -83,7 +82,7 @@ func TestNewRequest(t *testing.T) {
 	req, err := c.newRequest(http.MethodGet, "/foo", &body)
 	require.Nil(t, err)
 
-	expectedURL := "http://localhost:8000/foo"
+	expectedURL := fmt.Sprintf("%sfoo", BaseUrlEnvVariable)
 	assert.Equal(t, expectedURL, req.URL.String())
 
 	reqBody, err := ioutil.ReadAll(req.Body)
