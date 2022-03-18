@@ -2,21 +2,29 @@ package form3_api_client
 
 import (
 	"context"
-	"github.com/gorilla/mux"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/gorilla/mux"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 const BaseUrlEnvVariable = "http://localhost:8000/"
 
-func setup() (*mux.Router, *httptest.Server, *client) {
+func setupClient() (*mux.Router, *httptest.Server, *client) {
 	router := mux.NewRouter()
 	server := httptest.NewServer(router)
 	return router, server, newClient(nil, server.URL)
+}
+
+func testRequestMethod(t *testing.T, r *http.Request, want string) {
+	t.Helper()
+	if got := r.Method; got != want {
+		t.Errorf("Request method: %v, want %v", got, want)
+	}
 }
 
 func TestNewClient(t *testing.T) {
@@ -28,7 +36,7 @@ func TestNewClient(t *testing.T) {
 }
 
 func TestDo(t *testing.T) {
-	router, server, client := setup()
+	router, server, client := setupClient()
 	defer server.Close()
 
 	type foo struct {
@@ -45,13 +53,6 @@ func TestDo(t *testing.T) {
 	_, err := client.do(context.TODO(), req, &body)
 	require.Nil(t, err)
 	assert.Equal(t, foo{"a"}, body)
-}
-
-func testRequestMethod(t *testing.T, r *http.Request, want string) {
-	t.Helper()
-	if got := r.Method; got != want {
-		t.Errorf("Request method: %v, want %v", got, want)
-	}
 }
 
 func TestClientGET(t *testing.T) {
