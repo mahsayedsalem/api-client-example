@@ -110,6 +110,5 @@ Visit example folder to run key features directly.
 
 ## Enhancements
 
-* Add central logging
 * Add Validations
 * Add List operation with paging
