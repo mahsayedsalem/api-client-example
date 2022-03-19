@@ -28,7 +28,6 @@ type response struct {
 type errorResponse struct {
 	Response   *http.Response
 	StatusCode int
-	Code       string `json:"error_code"`
 	Message    string `json:"error_message"`
 }
 
@@ -129,10 +128,9 @@ func (e *errorResponse) Error() string {
 }
 
 func checkResponseErrors(r *http.Response) error {
-	if c := r.StatusCode; c >= 200 && c <= 299 {
+	if r.StatusCode >= 200 && r.StatusCode <= 299 {
 		return nil
 	}
-
 	errorResponse := &errorResponse{Response: r, StatusCode: r.StatusCode}
 	data, err := ioutil.ReadAll(r.Body)
 	if err == nil && len(data) > 0 {
