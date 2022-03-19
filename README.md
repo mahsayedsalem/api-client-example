@@ -85,7 +85,7 @@ fmt.Println(res.Response.StatusCode)
 ```
 
 ## Testing
-I've included both unit tests and e2e tests. The current coverage is 86%. Moving forward we can improve that by increasing the test cases.
+I've included both unit tests and e2e tests. The current coverage is 85%.
 
 ### Run Tests
 
