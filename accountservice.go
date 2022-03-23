@@ -7,7 +7,6 @@ import (
 )
 
 const (
-	defaultBaseURl = "http://localhost:8000/"
 	CreateURL 	   = "v1/organisation/accounts"
 	FetchURL  	   = "v1/organisation/accounts/%s"
 	DeleteUrl 	   = "v1/organisation/accounts/%s?version=%d"
@@ -18,11 +17,8 @@ type AccountService struct {
 }
 
 func NewAccountService(baseURL string) *AccountService{
-	if baseURL == "" {
-		baseURL = defaultBaseURl
-	}
 	return &AccountService{
-		client: newClient(nil, baseURL),
+		client: newClient(nil, BaseUrlEnvVariable),
 	}
 }
 
