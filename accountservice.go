@@ -17,8 +17,11 @@ type AccountService struct {
 }
 
 func NewAccountService(baseURL string) *AccountService{
+	if baseURL == "" {
+		baseURL = BaseUrlEnvVariable
+	}
 	return &AccountService{
-		client: newClient(nil, BaseUrlEnvVariable),
+		client: newClient(nil, baseURL),
 	}
 }
 
