@@ -20,12 +20,8 @@ jobs:
       run: go build -v ./...
     - name: Test
       run: go test -v ./...
-    - name: Run GoReleaser
-      uses: goreleaser/goreleaser-action@v2
-      with:
-        # either 'goreleaser' (default) or 'goreleaser-pro'
-        distribution: goreleaser
-        version: latest
-        args: release --rm-dist
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.26.0
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}\
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: true
