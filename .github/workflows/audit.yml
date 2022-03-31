@@ -1,7 +1,7 @@
 name: Audit
 
 on:
-  push:
+  pull_request:
     branches: [main]
 
 jobs:
@@ -39,9 +39,3 @@ jobs:
 
       - name: Run tests
         run: go test -race -vet=off ./...
-
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.17.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
