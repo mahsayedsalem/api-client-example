@@ -11,4 +11,4 @@
 *intentionally left blank*
 
 ### What are the relevant tickets / PRs?
-- [x] JIRA :gem:: https://jira.form3.com/browse/{number}
+- [x] JIRA :gem:: https://jira.com/browse/{number}
