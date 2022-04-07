@@ -1,7 +1,7 @@
 ![Unit Tests](https://github.com/mahsayedsalem/form3-api-client/actions/workflows/push.yml/badge.svg)
 
 <h1 align="center">
-  Form3 Take Home Excercise
+  Golang API Client Library Example
 </h1>
 
 <h4 align="center">An easy-to-use client library for Fake API.</h4>
